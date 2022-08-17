@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package com.grpcdemo;
+
+option java_multiple_files = true;
+
+message Project {
+  int32 project_id = 1;
+  string name = 2;
+  string levelOfDifficulty = 3;
+  string duration = 4;
+  int32 student_id = 5;
+}
+
+message Student{
+  int32 student_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string level = 4;
+  int32 project_id = 5;
+}
+
+service ProjectStudentService {
+  //unary- synchronous
+  //client will send one request and server will respond with one response
+  rpc getStudent(Student) returns (Student){}
+
+
+
+
+}
+
+service ProjectsStudentService{
+  //server streaming
+  rpc getProjectsByStudent(Student) returns (stream Project){}  //cant do this in rest
+  //client sends one request and server responds with a stream of response
+}
